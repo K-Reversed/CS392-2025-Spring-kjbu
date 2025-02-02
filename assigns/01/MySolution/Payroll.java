@@ -1,4 +1,3 @@
-
 public class Payroll {
     public static final int INITIAL_MAXIMUM_SIZE = 1024;
 
@@ -15,7 +14,8 @@ public class Payroll {
     }
     
     public int find_employee(String name) throws EmployeeNotFoundException {
-	/* your code */
+        int num = 0;
+        return (num);
     }
 
     public void add_payroll(Payroll source) {
@@ -29,5 +29,4 @@ public class Payroll {
     private Employee people[];
     private int maximum_size;
     private int current_size;
-    ...
 }
