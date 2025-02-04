@@ -4,13 +4,12 @@
  * @version  v1.0, Feb 2 2025
  */
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class TestPayroll {
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) throws InterruptedException {
         Scanner input = new Scanner(System.in);
 
         Payroll payroll = new Payroll();
@@ -32,7 +31,6 @@ public class TestPayroll {
                     7. Add payroll
                     8. Terminate Program""");
             System.out.print("Please enter a valid number: ");
-            id = 0;
             inputNumber = input.next();
 
             try {
@@ -45,44 +43,67 @@ public class TestPayroll {
             switch (selection) {
                 case 1:
                     System.out.println(payroll.size());
-                    System.out.println("Press enter to continue:");
-                    System.in.read();
+                    TimeUnit.SECONDS.sleep(2);
                     continue;
                 case 2:
+                    if (payroll.size() == 0) {
+                        System.out.println("There is no employee data!");
+                        TimeUnit.SECONDS.sleep(2);
+                        continue;
+                    }
+                    payroll.print();
+                    TimeUnit.SECONDS.sleep(2);
+                    continue;
                 case 3:
+                    Employee employee = new Employee();
+                    employee.ID = payroll.size();
+                    System.out.print("Enter the new employee's name: ");
+                    employee.name = input.next();
+                    payroll.add_employee(employee);
+                    TimeUnit.SECONDS.sleep(2);
+                    continue;
                 case 4:
+                    if (payroll.size() == 0) {
+                        System.out.println("There are no employees to remove!");
+                        TimeUnit.SECONDS.sleep(2);
+                        continue;
+                    }
                     try {
                         System.out.print("Please enter the employee's id: ");
                         id = input.nextInt();
                         payroll.remove_employee(id);
+                        continue;
                     } catch (EmployeeIndexException e) {
-                        System.out.println("Employee not found!");
-                        System.out.println("Press enter to continue:");
-                        System.in.read();
+                        System.out.println("Employee not found or does not exist!");
+                        TimeUnit.SECONDS.sleep(2);
                         continue;
                     } catch (InputMismatchException e) {
                         System.out.println("Not a number!");
-                        System.out.println("Press enter to continue:");
-                        System.in.read();
+                        TimeUnit.SECONDS.sleep(2);
                         continue;
                     }
                 case 5:
-                    name = input.next("Please enter the employee's name");
+                    if (payroll.size() == 0) {
+                        System.out.println("There is no employee data!");
+                        TimeUnit.SECONDS.sleep(2);
+                        continue;
+                    }
+                    System.out.print("Please enter the employee's name: ");
+                    name = input.next();
                     try {
                         id = payroll.find_employee(name);
                         System.out.println("Employee ID: " + id);
-                        System.out.println("Press enter to continue:");
-                        System.in.read();
+                        TimeUnit.SECONDS.sleep(2);
                         continue;
                     } catch (EmployeeNotFoundException e) {
                         System.out.println("Employee not found!");
-                        System.out.println("Press enter to continue:");
-                        System.in.read();
+                        TimeUnit.SECONDS.sleep(2);
                         continue;
                     }
                 case 6:
+                    payroll.copy_payroll(payroll);
                 case 7:
-                    System.out.println("7");
+                    payroll.add_payroll(payroll);
                 case 8:
                     System.out.println("Terminating program");
                     TimeUnit.SECONDS.sleep(2);
