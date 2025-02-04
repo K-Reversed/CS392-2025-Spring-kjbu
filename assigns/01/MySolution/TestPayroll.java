@@ -4,13 +4,13 @@
  * @version  v1.11, Feb 2 2025
  */
 
-import java.io.IOException;
-import java.text.DecimalFormat;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class TestPayroll {
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         Random r = new Random();
         int upper = 60000;
@@ -44,13 +44,21 @@ public class TestPayroll {
         System.out.println("__________________________________________________");
         payrollB.print();
 
-        int selection;
+        int selection = 0;
         do {
-            System.out.println("""
+            System.out.print("""
                     Choose an action:
-                    1. 
+                    1. S 
                     """);
-        } while (false);
+
+            try {
+                selection = input.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Input was not a number");
+                TimeUnit.SECONDS.sleep(2);
+            }
+
+        } while (selection != 8);
 
 
         input.close();

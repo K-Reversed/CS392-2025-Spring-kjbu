@@ -6,7 +6,7 @@
 import java.text.DecimalFormat;
 public class Payroll {
     public static final int INITIAL_MAXIMUM_SIZE = 1024;
-    DecimalFormat df = new DecimalFormat("#.00");
+    DecimalFormat df = new DecimalFormat(",###.00");
 
     public Payroll() {
         maximum_size = INITIAL_MAXIMUM_SIZE;
@@ -22,6 +22,9 @@ public class Payroll {
         return current_size;
     }
 
+    /**
+     * @since v1.11
+     */
     public void print(){
         try {
             for (Employee person : people) {
@@ -37,9 +40,14 @@ public class Payroll {
     }
 
     public void remove_employee(int i) throws EmployeeIndexException {
-        if (i > people.length - 1 || people[i] == null) {
-            throw new EmployeeIndexException();
+        if (i > people.length - 1 || people[i] == null || i == 0) {
+        throw new EmployeeIndexException();
         }
+
+        String name = people[i - 1].name;
+        people[i - 1] = null;
+
+
     }
     
     public int find_employee(String name) throws EmployeeNotFoundException {
