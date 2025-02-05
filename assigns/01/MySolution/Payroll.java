@@ -113,6 +113,7 @@ public class Payroll {
     public void add_payroll(Payroll source) {
         for (int i = 0; i < source.size(); i++) {
             people[i + current_size] = source.people[i];
+            people[i + current_size].ID += current_size;
         }
         current_size += source.current_size;
     }
