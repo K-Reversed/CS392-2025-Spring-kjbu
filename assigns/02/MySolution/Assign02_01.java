@@ -10,10 +10,6 @@ public class Assign02_01 {
       operations here. In particular, no bit-wise operations are allowed.
      */
     public static void main(String[] argv) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter an integer");
-        int num = input.nextInt();
-        System.out.println((int) Math.log10(num) + 1);
 	// Please give your implementation here
     }
 }
