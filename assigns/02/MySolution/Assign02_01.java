@@ -1,5 +1,7 @@
-import java.util.Scanner;
-
+/**
+ * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
+ * @version 1.0, 20 Feb 2025
+ */
 public class Assign02_01 {
     /*
       HX-2025-02-13: 10 points
@@ -11,5 +13,19 @@ public class Assign02_01 {
      */
     public static void main(String[] argv) {
 	// Please give your implementation here
+        int num = Integer.MIN_VALUE;
+        int power = 0;
+        int bitSize = 0;
+
+        System.out.println(num);
+        while (num != Integer.MAX_VALUE - 1) {
+            num += (int) Math.pow(2, power);
+            System.out.println(num);
+            power++;
+            bitSize++;
+        }
+
+        System.out.println("Bit length: " + bitSize);
     }
+
 }
