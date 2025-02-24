@@ -1,34 +1,32 @@
 ###########################################################################
 JAVA = java
 JAVAC = javac
-CLASS_PATH = -cp .
 
 JAR_FILE = ../../../assets/algs4/algs4.jar
-JAR_PATH = -cp $(JARFILE)
 
-ASSIGNS01: Assign02_01.class;
-	$(JAVA) $(JAR_PATH) $(CLASSPATH) ASSIGNS01
-ASSIGNS02: Assign02_02.class;
-	$(JAVA) $(JAR_PATH) $(CLASSPATH) ASSIGNS02
-ASSIGNS03: Assign02_03.class;
-	$(JAVA) $(JAR_PATH) $(CLASSPATH) ASSIGNS03
-ASSIGNS04: Assign02_04.class;
-	$(JAVA) $(JAR_PATH) $(CLASSPATH) ASSIGNS04
-ASSIGNS05: Assign02_05.class;
-	$(JAVA) $(JAR_PATH) $(CLASSPATH) ASSIGNS05
+Assign02_01: Assign02_01.class;
+	$(JAVA) -cp $(JAR_FILE) -cp . Assign02_01
+Assign02_02: Assign02_02.class;
+	$(JAVA) -cp $(JAR_FILE) -cp . Assign02_02
+Assign02_03: Assign02_03.class;
+	$(JAVA) -cp $(JAR_FILE) -cp . Assign02_03
+Assign02_04: Assign02_04.class;
+	$(JAVA) -cp $(JAR_FILE) -cp . Assign02_04
+Assign02_05: Assign02_05.class;
+	$(JAVA) -cp $(JAR_FILE) -cp . Assign02_05
 
 Assign02_01.class: Assign02_01.java;
-		$(JAVAC) $(JAR_PATH) $(CLASSPATH) Assign02_01.java
+		$(JAVAC) -cp $(JAR_FILE) -cp . Assign02_01.java
 Assign02_02.class: Assign02_02.java;
-		$(JAVAC) $(JAR_PATH) $(CLASSPATH) Assign02_02.java
+		$(JAVAC) -cp $(JAR_FILE) -cp . Assign02_02.java
 Assign02_03.class: Assign02_03.java;
-		$(JAVAC) $(JAR_PATH) $(CLASSPATH) Assign02_03.java
+		$(JAVAC) -cp $(JAR_FILE) -cp . Assign02_03.java
 Assign02_04.class: Assign02_04.java;
-		$(JAVAC) $(JAR_PATH) $(CLASSPATH) Assign02_04.java
+		$(JAVAC) -cp $(JAR_FILE) -cp . Assign02_04.java
 Assign02_05.class: Assign02_05.java;
-		$(JAVAC) $(JAR_PATH) $(CLASSPATH) Assign02_05.java
+		$(JAVAC) -cp $(JAR_FILE) -cp . Assign02_05.java
 
-CLEAN:
+clean:
 	rm -f *.class
 ###########################################################################
 ###########################################################################
