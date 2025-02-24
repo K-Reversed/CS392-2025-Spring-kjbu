@@ -10,6 +10,9 @@
       <sourceFolder url="file://$MODULE_DIR$/lectures/lecture-02-11" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/assigns/01/Code" />
       <excludeFolder url="file://$MODULE_DIR$/assigns/02/Code" />
+      <excludeFolder url="file://$MODULE_DIR$/admin" />
+      <excludeFolder url="file://$MODULE_DIR$/lectures" />
+      <excludeFolder url="file://$MODULE_DIR$/practice" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
