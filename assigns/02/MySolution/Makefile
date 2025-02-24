@@ -1,9 +1,10 @@
-JAVA=java
-JAVAC=javac
-CLASS_PATH=-cp .
+###########################################################################
+JAVA = java
+JAVAC = javac
+CLASS_PATH = -cp .
 
-JAR_FILE=../../../assets/algs4/algs4.jar
-JAR_PATH=-cp $(JARFILE)
+JAR_FILE = ../../../assets/algs4/algs4.jar
+JAR_PATH = -cp $(JARFILE)
 
 ASSIGNS01: Assign02_01.class;
 	$(JAVA) $(JAR_PATH) $(CLASSPATH) ASSIGNS01
@@ -26,5 +27,10 @@ Assign02_04.class: Assign02_04.java;
 		$(JAVAC) $(JAR_PATH) $(CLASSPATH) Assign02_04.java
 Assign02_05.class: Assign02_05.java;
 		$(JAVAC) $(JAR_PATH) $(CLASSPATH) Assign02_05.java
+
 CLEAN:
 	rm -f *.class
+###########################################################################
+###########################################################################
+###########################################################################
+
