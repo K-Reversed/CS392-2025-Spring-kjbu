@@ -11,6 +11,7 @@ public class Assign02_03<T> implements Deque<T> {
     private final int arrMaxSize;
     private final Object[] array;
 
+    /*
     public static void main(String[] args) {
         var dqArr = new Assign02_03();
         System.out.println(Arrays.toString(dqArr.array));
@@ -35,6 +36,8 @@ public class Assign02_03<T> implements Deque<T> {
         dqArr.insert_at_end(66);
         System.out.println(Arrays.toString(dqArr.array));
     }
+
+     */
 
     public Assign02_03(){
         arrSize = 0;
