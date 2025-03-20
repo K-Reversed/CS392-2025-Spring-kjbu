@@ -17,7 +17,6 @@ public class Assign02_05 {
                 if (binarySearch(A, 0, A.length - 1, k)) {
                     return true;
                 }
-
             }
         }
         return false;
