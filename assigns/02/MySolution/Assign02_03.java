@@ -7,7 +7,7 @@ import java.util.Arrays;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class Assign02_03<T> implements Deque<T> {
     // Please give an array-based implementation of Deque
-    private int arrSize;
+    private int arrSize, front;
     private final int arrMaxSize;
     private final Object[] array;
 
@@ -34,15 +34,19 @@ public class Assign02_03<T> implements Deque<T> {
         System.out.println(Arrays.toString(dqArr.array));
         dqArr.insert_at_beg(65);
         dqArr.insert_at_end(66);
+        dqArr.insert_at_end(67);
+        dqArr.insert_at_end(68);
+        dqArr.insert_at_end(69);
+        dqArr.insert_at_end(70);
+        dqArr.insert_at_end(71);
         System.out.println(Arrays.toString(dqArr.array));
     }
-
      */
 
     public Assign02_03(){
-        arrSize = 0;
+        arrSize = front = 0;
         arrMaxSize = 10;
-        array = new Object[10];
+        array = new Object[arrMaxSize];
     }
 
     @Override
@@ -66,8 +70,9 @@ public class Assign02_03<T> implements Deque<T> {
             System.out.println("List is Empty!");
             return null;
         }
-        T item = (T) array[arrSize - 1];
-        array[arrSize - 1] = null;
+        T item = (T) array[front];
+        array[front] = null;
+        front = (front + 1) % arrMaxSize;
         arrSize--;
         return item;
     }
@@ -78,7 +83,8 @@ public class Assign02_03<T> implements Deque<T> {
             System.out.println("List is Full!");
             return;
         }
-        array[arrSize] = x;
+        front = (front - 1 + arrMaxSize) % arrMaxSize;
+        array[front] = x;
         arrSize++;
     }
 
@@ -88,13 +94,9 @@ public class Assign02_03<T> implements Deque<T> {
             System.out.println("List is Empty!");
             return null;
         }
-        T item = (T) array[0];
-        array[0] = null;
-        for (int i = 0; i < arrSize - 1; i++) {
-            array[i] = array[i + 1];
-            array[i + 1] = null;
-        }
-
+        int rear = (front + arrSize - 1) % arrMaxSize;
+        T item = (T) array[rear];
+        array[rear] = null;
         arrSize--;
         return item;
     }
@@ -105,11 +107,8 @@ public class Assign02_03<T> implements Deque<T> {
             System.out.println("List is Full!");
             return;
         }
-        for (int i = arrSize; i > 0; i--) {
-            array[i] = array[i - 1];
-        }
-
-        array[0] = x;
+        int rear = (front + arrSize) % arrMaxSize;
+        array[rear] = x;
         arrSize++;
     }
 }
