@@ -4,6 +4,11 @@ public class Assign03_02{
     public static <T> boolean stableSort(ArraySorter<T> sorter, T[] A) {
 	    // Please use the given [sorter] to sort T[] A. The return value
 	    // (true or false) should indicate whether the sorting done is stable
+        int[] IDHashes = new int[A.length];
+        for (int i = 0; i < IDHashes.length; i++) {
+            IDHashes[i] = System.identityHashCode(A[i]);
+        }
+        System.out.println(Arrays.toString(IDHashes));
         final Set<Object> dupes = new HashSet<>();
         final Set<Object> tmp = new HashSet<>();
         final List<Integer> hashes = new ArrayList<>(List.of());
@@ -47,7 +52,6 @@ public class Assign03_02{
         var sorter = new ArraySorter<>() {
             @Override
             public void sort(Object[] A) {
-                System.out.println(Arrays.toString(A));
                 int len = A.length;
                 for (int i = 0; i < len; i++) {
                     Object key = A[i];
