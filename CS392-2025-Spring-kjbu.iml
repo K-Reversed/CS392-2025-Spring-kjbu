@@ -5,13 +5,8 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/assigns/01/MySolution" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/assigns/02/MySolution" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/lectures/lecture-02-06" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/lectures/lecture-02-11" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/lectures/lecture-02-20" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/lectures/lecture-02-25" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/practice/25 Feb 2025/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/assigns/03/MySolution" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/lectures/lecture-03-18" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/practice/04 Feb 2025/Hello/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/practice/06 Mar 2025/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/assigns/01/Code" />
