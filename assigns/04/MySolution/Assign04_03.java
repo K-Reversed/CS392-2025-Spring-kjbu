@@ -1,5 +1,12 @@
+/**
+ * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
+ * @version 1.0, 25 Mar 2025
+ */
 import java.util.Comparator;
 
+/**
+ * @since v1.0
+ */
 public class Assign04_03 {
 
     // This class should not be instantiated.
@@ -10,11 +17,11 @@ public class Assign04_03 {
     }
 
     public static <T extends Comparable<T>> void listSort(LList<T> xs) {
-	// Please implement [mergesort] on a linked list
-	// Note that no extra heap memory is needed for list-mergesort
+	    // Please implement [mergesort] on a linked list
+	    // Note that no extra heap memory is needed for list-mergesort
     }
 
     public static void main(String[] argv) {
-	// Please provide some testing code here	
+	    // Please provide some testing code here
     }
 }

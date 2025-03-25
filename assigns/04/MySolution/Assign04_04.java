@@ -1,5 +1,12 @@
+/**
+ * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
+ * @version 1.0, 25 Mar 2025
+ */
 import java.util.Comparator;
 
+/**
+ * @since v1.0
+ */
 public class Assign04_04 {
 
     // This class should not be instantiated.
