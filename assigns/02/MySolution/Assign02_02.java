@@ -1,9 +1,12 @@
 /**
  * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
- * @version 1.0, 20 Feb 2025
+ * @version v1.0, 20 Feb 2025
  */
 import java.util.Arrays;
 
+/**
+ * @since v1.0
+ */
 public class Assign02_02 {
     /*
       HX-2025-02-13: 10 points

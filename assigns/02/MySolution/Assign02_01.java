@@ -1,6 +1,10 @@
 /**
  * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
- * @version 1.0, 20 Feb 2025
+ * @version v1.0, 20 Feb 2025
+ */
+
+/**
+ * @since v1.0
  */
 public class Assign02_01 {
     /*
@@ -11,6 +15,7 @@ public class Assign02_01 {
       is expected return the correct answer instantly. Note that you can only use arithmetic
       operations here. In particular, no bit-wise operations are allowed.
      */
+
     public static void main(String[] argv) {
 	// Please give your implementation here
         int num = Integer.MIN_VALUE;

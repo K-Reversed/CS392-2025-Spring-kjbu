@@ -1,3 +1,7 @@
+/**
+ * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
+ * @version 1.0, 03 Mar 2025
+ */
 import edu.princeton.cs.algs4.In;
 public class Assign03_01 {
     /*

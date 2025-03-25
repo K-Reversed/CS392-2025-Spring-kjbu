@@ -1,14 +1,23 @@
 /**
  * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
- * @version 1.0, 20 Feb 2025
+ * @version v1.2, 22 Feb 2025
+ */
+
+/**
+ * @since v1.0
  */
 class Node {
     Object item;
     Node previous, next;
 }
 
+/**
+ * @since v1.0
+ */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class Assign02_04<T> implements Deque<T> {
+    // Please give a list-based implementation of Deque
+    // Note that the underlying list needs to be doubly-linked!
     private int listSize;
     private final int listMax;
     private Node top;
@@ -40,6 +49,9 @@ public class Assign02_04<T> implements Deque<T> {
         System.out.println(dqList.size());
     }
 
+    /**
+     * @since v1.0
+     */
     public Assign02_04() {
         listSize = 0;
         listMax = 10;
@@ -128,7 +140,27 @@ public class Assign02_04<T> implements Deque<T> {
         }
         listSize++;
     }
-    // Please give a list-based implementation of Deque
-    // Note that the underlying list needs to be doubly-linked!
+
+    public String toString() {
+        String result = "[";
+        Node current = top;
+        while (current.next != null) {
+            result += current.item + ", ";
+            current = current.next;
+            if (current.next == null) {
+                result += current.item;
+            }
+        }
+        result += "]";
+        return result;
+    }
+
+    public Node getTop() {
+        return top;
+    }
+
+    public Node getBottom() {
+        return bottom;
+    }
 }
 
