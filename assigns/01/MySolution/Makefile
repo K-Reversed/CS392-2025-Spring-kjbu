@@ -14,9 +14,9 @@ all::
 	TestPayroll
 ########################################################################
 TestPayroll: TestPayroll.class;
-	$(JAVA) -cp $(JAR_FILE) $(CLASSPATH) TestPayroll
+	$(JAVA) -cp $(CLASS_PATHS) $(CLASSPATH) TestPayroll
 TestPayroll.class: TestPayroll.java;
-	$(JAVAC) -cp $(JAR_FILE) $(CLASSPATH) TestPayroll.java
+	$(JAVAC) -cp $(CLASS_PATHS) $(CLASSPATH) TestPayroll.java
 ########################################################################
 clean:
 	rm -f *.class
