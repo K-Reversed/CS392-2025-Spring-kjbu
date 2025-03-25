@@ -16,6 +16,7 @@
       <excludeFolder url="file://$MODULE_DIR$/lectures" />
       <excludeFolder url="file://$MODULE_DIR$/practice" />
       <excludeFolder url="file://$MODULE_DIR$/assigns/03/Code" />
+      <excludeFolder url="file://$MODULE_DIR$/pground" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
