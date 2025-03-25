@@ -1,53 +1,59 @@
+/**
+ * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
+ * @version 1.1, 22 Mar 2025
+ */
 import java.util.*;
 
+/**
+ * @since v1.0
+ */
 public class Assign03_02{
     public static <T> boolean stableSort(ArraySorter<T> sorter, T[] A) {
 	    // Please use the given [sorter] to sort T[] A. The return value
 	    // (true or false) should indicate whether the sorting done is stable
-        int[] IDHashes = new int[A.length];
-        for (int i = 0; i < IDHashes.length; i++) {
-            IDHashes[i] = System.identityHashCode(A[i]);
-        }
-        System.out.println(Arrays.toString(IDHashes));
-        final Set<Object> dupes = new HashSet<>();
-        final Set<Object> tmp = new HashSet<>();
-        final List<Integer> hashes = new ArrayList<>(List.of());
-        boolean isStable = false;
+        int index = 0;
+        int[] dupes = new int[A.length * 2];
 
-        for (Object t : A) {
-            if (!tmp.add(t.toString().split(":")[0])) {
-                dupes.add(t.toString().split(":")[0]);
-            }
-        }
-        //System.out.println(dupes);
-        for (Object o : dupes) {
-            for (T t : A) {
-                if (t.toString().split(":")[0].hashCode() == o.hashCode()) {
-                    //System.out.println(t);
-                    hashes.add(System.identityHashCode(t));
+        boolean isStable = false;
+        for (int i = 0; i < A.length - 1; i++) {
+            for (int j = i + 1; j < A.length; j++) {
+                if (A[i].toString().equals(A[j].toString())) {
+                    dupes[index] = System.identityHashCode(A[i]);
+                    index++;
+                    dupes[index] = System.identityHashCode(A[j]);
+                    index++;
+                    System.out.println(A[i] + ":" + System.identityHashCode(A[i]) + ", " + A[j] + ":" + System.identityHashCode(A[j]));
                 }
             }
         }
-        //System.out.println(hashes);
+
+        System.out.println(Arrays.toString(dupes));
 
         sorter.sort(A);
 
-        if (dupes.isEmpty()) {
-            System.out.println("No duplicates found, expression is assumed to be stable.");
-            return true;
-        }
-
-        for (int i = 0; i < hashes.size() - 1; i++) {
-            for (int j = 0; j < A.length - 1; j++) {
-                //System.out.println(hashes.get(i) + ", " + System.identityHashCode(A[j]) + " | " + hashes.get(i + 1) + ", " + System.identityHashCode(A[j + 1]));
-                if (hashes.get(i) == System.identityHashCode(A[j]) && hashes.get(i + 1) == System.identityHashCode(A[j + 1])) {
-                    isStable = true;
+        for (int i = 0; i < A.length - 1; i++) {
+            int tmp = System.identityHashCode(A[i]);
+            int tmp1 = System.identityHashCode(A[i + 1]);
+            for (int j = 0; j < dupes.length; j++) {
+                if (dupes[j] == 0) {
+                    break;
+                }
+                if (tmp == dupes[j]) {
+                    if (tmp1 == dupes[j + 1]) {
+                        isStable = true;
+                    }
                 }
             }
+        }
+
+        if (dupes[0] == 0) {
+            System.out.println("No duplicates found, sort is assumed to be stable.");
+            isStable = true;
         }
 
         return isStable;
     }
+
     public static void main(String[] args){
         var sorter = new ArraySorter<>() {
             @Override
@@ -56,7 +62,7 @@ public class Assign03_02{
                 for (int i = 0; i < len; i++) {
                     Object key = A[i];
                     int j = i - 1;
-                    while ((j >= 0) && (A[j].toString().split(":")[0].hashCode() > key.toString().split(":")[0].hashCode())) {
+                    while ((j >= 0) && (A[j].toString().hashCode() > key.toString().hashCode())) {
                         A[j + 1] = A[j];
                         j--;
                     }
@@ -64,46 +70,38 @@ public class Assign03_02{
                 }
             }
         };
-
-        ObjectID[] objects = {
-                new ObjectID(10, 0),
-                new ObjectID(9, 0),
-                new ObjectID(9, 1),
-                new ObjectID(8, 0),
-                new ObjectID(7, 0),
-                new ObjectID(6, 0),
-                new ObjectID(5, 0),
-                new ObjectID(5, 1),
-                new ObjectID(4, 0),
-                new ObjectID(3, 0),
-                new ObjectID(2, 0),
-                new ObjectID(1, 0),
+        
+        OInt[] integers = {
+                new OInt(10),
+                new OInt(10),
+                new OInt(9),
+                new OInt(8),
+                new OInt(7),
+                new OInt(6),
+                new OInt(6),
+                new OInt(5),
+                new OInt(4),
+                new OInt(3),
+                new OInt(2),
+                new OInt(1)
         };
 
-        System.out.println(Arrays.toString(objects));
-        Collections.shuffle(Arrays.asList(objects));
-        System.out.println(Arrays.toString(objects));
-        System.out.println(stableSort(sorter, objects));
-        System.out.println(Arrays.toString(objects));
+        System.out.println(Arrays.toString(integers));
+        Collections.shuffle(Arrays.asList(integers));
+        System.out.println(Arrays.toString(integers));
+        System.out.println(stableSort(sorter, integers));
+        System.out.println(Arrays.toString(integers));
     }
 }
 
-class ObjectID implements Comparable<ObjectID>{
-    private final Object obj;
+class OInt{
     private final int id;
-
-    ObjectID(Object obj, int id) {
-        this.obj = obj;
+    OInt(int id) {
         this.id = id;
     }
 
     @Override
-    public int compareTo(ObjectID o) {
-        return this.obj.toString().compareTo(o.obj.toString());
-    }
-
-    @Override
     public String toString() {
-        return this.obj.toString() + ":" + this.id;
+        return String.valueOf(this.id);
     }
 }

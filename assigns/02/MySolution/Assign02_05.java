@@ -1,6 +1,6 @@
 /**
  * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
- * @version 1.0, 20 Feb 2025
+ * @version v1.0, 20 Feb 2025
  */
 public class Assign02_05 {
 

@@ -1,3 +1,7 @@
+/**
+ * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
+ * @version 1.1, 03 Mar 2025
+ */
 import java.util.Arrays;
 import java.util.Comparator;
 
