@@ -2,7 +2,10 @@
 JAVA = java
 JAVAC = javac
 
-CLASS_PATHS = .:./../../../assets/algs4/algs4.jar
+SRC = .
+JAR = ./../../../assets/algs4/algs4.jar
+ASSIGNS02 = ./../../02/MySolution
+CLASS_PATHS = $(JAR):$(ASSIGNS02):$(SRC)
 
 
 Assign03_01: Assign03_01.class;
@@ -17,12 +20,12 @@ Assign03_05: Assign03_05.class;
 	$(JAVA) Assign03_05 -cp $(CLASS_PATHS)
 
 Assign03_01.class: Assign03_01.java;
-	$(JAVAC) Assign03_01.java -cp $(CLASS_PATHS) -d .
+	$(JAVAC) Assign03_01.java -cp $(CLASS_PATHS)
 Assign03_02.class: Assign03_02.java;
-	$(JAVAC) Assign03_02.java -cp $(CLASS_PATHS) -cp .
+	$(JAVAC) Assign03_02.java -cp $(CLASS_PATHS)
 Assign03_03.class: Assign03_03.java;
-	$(JAVAC) ./../../02/MySolution/Deque.java -d .
-	$(JAVAC) ./../../02/MySolution/Assign02_03.java -d . -cp .
+	$(JAVAC) ./../../02/MySolution/Deque.java -d $(SRC)
+	$(JAVAC) ./../../02/MySolution/Assign02_03.java -d $(SRC)
 	$(JAVAC) Assign03_03.java -cp $(CLASS_PATHS)
 Assign03_04.class: Assign03_04.java;
 	$(JAVAC) ./../../02/MySolution/Deque.java -d .
