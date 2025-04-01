@@ -3,7 +3,7 @@
  * @version 1.0, 25 Mar 2025
  */
 
-import java.util.Comparator;
+import java.util.Arrays;
 
 /**
  * @since v1.0
@@ -24,12 +24,12 @@ public class Assign04_01 {
     }
 
     public static <T extends Comparable<T>> void sort(T[] A) {
-		final int n = A.length;
-		sortRec(A, 0, n);
+		final int length = A.length;
+		sortRecursion(A, 0, length);
     }
 
     private static <T> int getPivot(int left, int right) {
-		return left; // HX: FIXME!!!
+        return (int) Math.floor(Math.random() * (right - left + 1) + left); // HX: FIXME!!!
     }
 
     private static <T extends Comparable<T>> int split(T[] A, int left, int right) {
@@ -42,27 +42,43 @@ public class Assign04_01 {
 		}
 		return splitRecursion(A, pointer, pointer + 1, pivot); // HX: we have pvt <= A[p1]
     }
-    private static <T extends Comparable<T>> int splitRecursion(T[] A, int pointer1, int pointer2, T pivot) {
+
+    private static <T extends Comparable<T>> int splitRecursion(T[] A, int left, int right, T pivot) {
 		// Please implement it according to the method presented in Lecture-03-18:
 		// p1 and p2 are two pointers that both move from the left to the right
 		// The entries ahead of p1 are less than the pivot
 		// The entries between p1 and p2 are greater than or equal to the pivot
 		// And p1 is finally returned once p2 reaches to the right end of the array A
-		return pointer1;
+		if (right < A.length - 1) {
+			if (less(A[right], pivot)) {
+				exchange(A, left, right);
+				return splitRecursion(A, left + 1, right + 1, pivot);
+			} else {
+				return splitRecursion(A, left, right + 1, pivot);
+			}
+		}
+		System.out.println(Arrays.toString(A));
+		return left;
     }
 
-    private static <T extends Comparable<T>> void sortRec(T[] A, int left, int right) {
+    private static <T extends Comparable<T>> void sortRecursion(T[] A, int left, int right) {
 		if (right <= left + 1) return;
-		final int pivot = getPivot(left, right);
+		final int pivot = getPivot(left, right - 1);
+		System.out.println("Pivot: " + pivot + "(" + A[pivot] + ")");
 		exchange(A, pivot, right - 1); // HX: r-1 is good since r >= l+2
 		final int mid = split(A, left, right);
 		exchange(A, mid, right - 1);
-		sortRec(A, left, mid);
-		sortRec(A, mid + 1, right);
+		sortRecursion(A, left, mid);
+		sortRecursion(A, mid + 1, right);
     }
 
     public static void main(String[] argv) {
-	// Please provide some testing code here
+		// Please provide some testing code here
+		Integer[] integers = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+		System.out.println(Arrays.toString(integers));
+		sort(integers);
+
+		System.out.println("\n" + Arrays.toString(integers));
     }
 
 }
