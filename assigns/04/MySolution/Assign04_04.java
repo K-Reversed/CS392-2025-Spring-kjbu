@@ -9,37 +9,37 @@ import java.util.Comparator;
 /**
  * @since v1.0
  */
-@SuppressWarnings({"unchecked", "UnnecessaryBoxing"})
+@SuppressWarnings({"unchecked", "UnnecessaryBoxing", "removal", "CachedNumberConstructorCall"})
 public class Assign04_04 {
 
     public static void main(String[] argv) {
         // Please provide some testing code here
 
-        Integer[] integers = new Integer[]{
-                Integer.valueOf(10),
-                Integer.valueOf(10),
-                Integer.valueOf(9),
-                Integer.valueOf(8),
-                Integer.valueOf(7),
-                Integer.valueOf(6),
-                Integer.valueOf(6),
-                Integer.valueOf(5),
-                Integer.valueOf(4),
-                Integer.valueOf(3),
-                Integer.valueOf(2),
-                Integer.valueOf(1),
+        Integer[] integers = {
+                new Integer(10),
+                new Integer(10),
+                new Integer(9),
+                new Integer(8),
+                new Integer(7),
+                new Integer(6),
+                new Integer(6),
+                new Integer(5),
+                new Integer(4),
+                new Integer(3),
+                new Integer(2),
+                new Integer(1),
         };
         String[] strings = {
-                new String("z"),
                 new String("cat"),
                 new String("cat"),
                 new String("cat"),
-                new String("r"),
-                new String("y"),
-                new String("p"),
-                new String("p"),
-                new String("q"),
-                new String("g"),
+                new String("cat"),
+                new String("cat"),
+                new String("mat"),
+                new String("sat"),
+                new String("sat"),
+                new String("hat"),
+                new String("hat"),
                 };
         System.out.println(Arrays.toString(integers));
         Collections.shuffle(Arrays.asList(integers));
@@ -70,35 +70,66 @@ public class Assign04_04 {
         int index = 0;
         int[] dupes = new int[A.length * 2];
 
+        //finds all duplicates in array, stored as identity hash
         for (int i = 0; i < A.length - 1; i++) {
             for (int j = i + 1; j < A.length; j++) {
                 if (A[i].toString().equals(A[j].toString())) {
-                    dupes[index] = System.identityHashCode(A[i]);
-                    index++;
-                    dupes[index] = System.identityHashCode(A[j]);
-                    index++;
+                    boolean iDupe = false;
+                    boolean jDupe = false;
+                    for (int dupe : dupes) {
+                        if (dupe == System.identityHashCode(A[i])) {
+                            iDupe = true;
+                            break;
+                        }
+                    }
+                    if (!iDupe) {
+                        dupes[index] = System.identityHashCode(A[i]);
+                        index++;
+                    }
+                    for (int dupe : dupes) {
+                        if (dupe == System.identityHashCode(A[j])) {
+                            jDupe = true;
+                            break;
+                        }
+                    }
+                    if (!jDupe) {
+                        dupes[index] = System.identityHashCode(A[j]);
+                        index++;
+                    }
                     System.out.println(A[i] + ":" + System.identityHashCode(A[i]) + ", " + A[j] + ":" + System.identityHashCode(A[j]));
+                    System.out.println(Arrays.toString(dupes));
                 }
             }
         }
+        System.out.println(Arrays.toString(dupes));
 
         //returns a sorted array
         sort.sort(A);
 
+        //compares sorted list to duplicate list, if sorted correctly, each pair should correspond to a section of the duplicate list. A single element marks the end of a list of duplicates. An empty array means no duplicates at that point.
         for (int i = 0; i < A.length - 1; i++) {
+            System.out.print("[");
             int tmp = System.identityHashCode(A[i]);
             int tmp1 = System.identityHashCode(A[i + 1]);
             for (int j = 0; j < dupes.length; j++) {
                 if (dupes[j] == 0) {
+                    System.out.println("]");
                     break;
                 }
                 if (tmp == dupes[j]) {
                     if (tmp1 == dupes[j + 1]) {
-                        System.out.println(A[i] + " " + tmp1 + " : " + A[i + 1] + " " + dupes[j + 1]);
+                        System.out.print(tmp + ", ");
+                        System.out.print(tmp1);
+                    } else {
+                        System.out.print(tmp);
+
                     }
                 }
             }
+
         }
+
+        System.out.println(Arrays.toString(dupes));
     }
 
     @SuppressWarnings("unchecked")
