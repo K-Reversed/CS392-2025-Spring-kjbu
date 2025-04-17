@@ -161,10 +161,15 @@ public class PriorityQueue<T extends Comparable<T>> implements Queue<T> {
         System.out.println(queue);
 
         queue.remove();
-        queue.remove();
-        queue.remove();
-        queue.remove();
+        System.out.println(queue);
 
+        queue.remove();
+        System.out.println(queue);
+
+        queue.remove();
+        System.out.println(queue);
+
+        queue.remove();
         System.out.println(queue);
     }
 }
