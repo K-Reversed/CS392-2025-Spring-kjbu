@@ -79,12 +79,23 @@ public class Heap<T extends Comparable<T>> {
         }
         return root;
     }
+
+    public T peek() {
+        if (isEmpty()){
+            throw new NoSuchElementException("Heap is empty.");
+        }
+        return contents[0];
+    }
     
     /**
      * isEmpty - does the heap currently have no items?
      */
     public boolean isEmpty() {
         return (numItems == 0);
+    }
+
+    public boolean isFull() {
+        return (numItems >= contents.length);
     }
     
     /**
