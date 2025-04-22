@@ -17,40 +17,27 @@ import java.util.NoSuchElementException;
 public class PriorityQueue<T extends Comparable<T>> implements Queue<T>{
     // Please implement heap-based priority queue
     // See PQItem.java for attaching priority to data
-    private int size;
 
-    private static class PQItem<T> implements Comparable<PQItem<T>> {
-        private final T data;
-        private int priority;
-
-        public PQItem(T data, int priority) {
-            this.data = data;
-            this.priority = priority;
-        }
-
-        public int getPriority() {
-            return priority;
-        }
+    private record PQItem<T>(T data, int priority) implements Comparable<PQItem<T>> {
 
         @Override
-        public int compareTo(PQItem o) {
-            return priority - o.priority;
-        }
+            public int compareTo(PQItem o) {
+                return priority - o.priority;
+            }
 
-        public String toString() {
-            if (data == null) {
-                return "null(priority = " + priority + ")";
-            } else {
-                return data + "(priority = " + priority + ")";
+            public String toString() {
+                if (data == null) {
+                    return "null(priority = " + priority + ")";
+                } else {
+                    return data + "(priority = " + priority + ")";
+                }
             }
         }
-    }
 
     private final Heap<PQItem<T>> heap;
 
     public PriorityQueue(int capacity) {
         heap = new Heap<>(capacity);
-        size = 0;
     }
 
     @Override
@@ -59,7 +46,6 @@ public class PriorityQueue<T extends Comparable<T>> implements Queue<T>{
             System.out.println("Heap is full");
             return false;
         }
-        size++;
         return heap.insert(new PQItem<>(item, 0));
     }
 
@@ -68,7 +54,6 @@ public class PriorityQueue<T extends Comparable<T>> implements Queue<T>{
         if (isEmpty()) {
             throw new NoSuchElementException("Heap is empty.");
         }
-        size--;
         return heap.remove().data;
     }
 
