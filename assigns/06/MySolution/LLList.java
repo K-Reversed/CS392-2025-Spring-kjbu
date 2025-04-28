@@ -11,7 +11,7 @@ import java.util.*;
  * The linked list includes a dummy head node that allows us to avoid
  * special cases for insertion and deletion at the front of the list.
  */
-public class LLList implements List {
+public class LLList /*implements List*/ {
     // Inner class for a node.  We use an inner class so that the LLList
     // methods can access the instance variables of the nodes.
     private class Node {
@@ -167,14 +167,14 @@ public class LLList implements List {
     /*
      * iterator - returns an iterator for this list
      */
-    public ListIterator iterator() {
+    public LLListIterator iterator() {
         return new LLListIterator();
     }
     
     /*
      * private inner class for an iterator over an LLList
      */
-    private class LLListIterator implements ListIterator {
+    private class LLListIterator /*implements ListIterator*/ {
         private Node nextNode;       // the next node to visit    
         
         public LLListIterator() {
