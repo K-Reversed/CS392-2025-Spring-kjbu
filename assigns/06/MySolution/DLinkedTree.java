@@ -105,17 +105,18 @@ public class DLinkedTree{
             delete(key);
             return;
         }
-        root = insertTree(key, item, root);
+        root = insertTree(key, item, root, null);
     }
 
-    private Node insertTree(int key, Object item, Node node){
+    private Node insertTree(int key, Object item, Node node, Node parent){
         if (node == null) return new Node(key, item, 1);
         if (key < node.key) {
-            node.left = insertTree(key, item, node.left);
+            node.left = insertTree(key, item, node.left, node);
         } else if (key > node.key) {
-            node.right = insertTree(key, item, node.right);
+            node.right = insertTree(key, item, node.right, node);
         } else {
             node.data = (LLList) item;
+            node.parent = parent;
         }
         node.size = size(node.left) + size(node.right) + 1;
         return node;
@@ -125,7 +126,7 @@ public class DLinkedTree{
 
     public LLList delete(int key) {
         if (root == null) return null;
-        Node dump = deleteTree(key, root);
+        Node dump = deleteTree(key, root, null);
         if (dump == null) {
             return null;
         } else {
@@ -133,11 +134,11 @@ public class DLinkedTree{
         }
     }
 
-    private Node deleteTree(int key, Node node) {
+    private Node deleteTree(int key, Node node, Node parent) {
         if (key < node.key) {
-            node.left = deleteTree(key, node.left);
+            node.left = deleteTree(key, node.left, node);
         } else if (key > node.key) {
-            node.right = deleteTree(key, node.right);
+            node.right = deleteTree(key, node.right, node);
         } else {
             if (node.left == null) {
                 return node.right;
@@ -148,6 +149,7 @@ public class DLinkedTree{
                 node = min(temp.right);
                 node.right = deleteMin(temp.right);
                 node.left = temp.left;
+                node.parent = parent;
                 root = node;
             }
         }
@@ -187,7 +189,7 @@ public class DLinkedTree{
     private Node reRootTree(Node newRoot, Node oldRoot) {
         if (newRoot == null) return null;
         if (newRoot.key != oldRoot.key) {
-            insertTree(oldRoot.key, oldRoot.data, newRoot);
+            insertTree(oldRoot.key, oldRoot.data, newRoot, null);
         }
         if (oldRoot.left != null) {
             reRootTree(newRoot, oldRoot.left);
