@@ -1,3 +1,5 @@
-public class DFSforCS392<T> {
+public class DFSforCS392<T extends Comparable<T>> {
+    public DFSforCS392() {
 
+    }
 }

@@ -8,23 +8,23 @@ public class EightQueensPuzzle {
         q8.solveBoard();
     }
     private final int[] queensPos;
+    private final int N = 8;
 
     public EightQueensPuzzle(int[] rowPos) {
         queensPos = rowPos;
     }
 
     public void solveBoard() {
-        solveBoard(new int[8], 0, 0, 0);
+        solveBoard(new int[N], 0, 0, 0);
     }
 
     private int solveBoard(int[] qPos, int row, int column, int solutions) {
-        if (column < 8) {
-            System.out.println(row + ", " + column);
+        if (column < N) {
             if (checkSafe(qPos, row, column, row - 1)) {
                 final int[] newPos = boardSet(qPos, row, column);
-                if (row + 1 == 8) {
+                if (row + 1 == N) {
                     System.out.println("Solution #" + (solutions + 1)  + ":");
-                    printBoard(newPos, 0);
+                    printBoard(newPos);
                     return solveBoard(qPos, row, column + 1, solutions + 1);
                 } else {
                     return solveBoard(newPos, row + 1, 0, solutions);
@@ -40,7 +40,7 @@ public class EightQueensPuzzle {
     }
 
     private int boardGet(int[] board, int row) {
-        if (row >= 0 && row < 8) {
+        if (row >= 0 && row < N) {
             return board[row];
         } else {
             return 0;
@@ -54,8 +54,8 @@ public class EightQueensPuzzle {
 
     private boolean checkSafe(int[] qPos, int row, int column, int i) {
         if (i >= 0) {
-            if (check(qPos, row, column, i)) {
-                checkSafe(qPos, row, column, i - 1);
+            if (checkVertical(qPos, row, column, i)) {
+                return checkSafe(qPos, row, column, i - 1);
             } else {
                 return false;
             }
@@ -63,35 +63,36 @@ public class EightQueensPuzzle {
         return true;
     }
 
-    private boolean check(int[] qPos, int row, int column, int i) {
+    private boolean checkVertical(int[] qPos, int row, int column, int i) {
         return qPos[i] != column && Math.abs(row - i) != Math.abs(column - qPos[i]);
     }
 
     public void printBoard() {
-        printBoard(queensPos, 0);
+        printBoard(queensPos);
     }
 
-    private void printBoard(int[] positions, int row) {
-        if (row >= 8) {
-            System.out.println();
-            return;
-        }
-        printRow(positions, row, 0);
-        row++;
-        printBoard(positions, row);
+    private void printBoard(int[] positions) {
+        printRow(positions[0]);
+        printRow(positions[1]);
+        printRow(positions[2]);
+        printRow(positions[3]);
+        printRow(positions[4]);
+        printRow(positions[5]);
+        printRow(positions[6]);
+        printRow(positions[7]);
     }
 
-    private void printRow(int[] positions, int row, int column){
-        if (column >= 8) {
-            System.out.println();
-            return;
-        }
-        if (positions[row] == column) {
-            System.out.print("[Q]");
-        } else {
+    private void printRow(int rows){
+        printSquares(rows);
+        System.out.print("[Q]");
+        printSquares(N - rows - 1);
+        System.out.println();
+    }
+
+    private void printSquares(int squares) {
+        if (squares > 0) {
             System.out.print("[ ]");
+            printSquares(squares - 1);
         }
-        column++;
-        printRow(positions, row, column);
     }
 }
