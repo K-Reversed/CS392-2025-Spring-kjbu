@@ -1,17 +1,18 @@
-public class EightQueensPuzzle {
-    public static void main(String[] args) {
-//        0, 4, 7, 1, 6, 2, 5, 3
-        int[] rowPos = {0, 1, 2, 3, 4, 5, 6, 7};
-        var q8 = new EightQueensPuzzle(rowPos);
-
-        q8.printBoard();
-        q8.solveBoard();
-    }
+public class NQueensPuzzle {
     private final int[] queensPos;
     private final int N = 8;
 
-    public EightQueensPuzzle(int[] rowPos) {
+    public NQueensPuzzle(int[] rowPos) {
         queensPos = rowPos;
+    }
+
+    public void solveBoardDFS() {
+        solveBoardDFS(new int[N][N], 0, 0);
+    }
+
+    public void solveBoardDFS(int[][] board, int row, int solutions) {
+        DFSforCS392<Integer> dfs = new DFSforCS392<>();
+        dfs.depthFirstSearch(board, row, solutions);
     }
 
     public void solveBoard() {
@@ -54,7 +55,7 @@ public class EightQueensPuzzle {
 
     private boolean checkSafe(int[] qPos, int row, int column, int i) {
         if (i >= 0) {
-            if (checkVertical(qPos, row, column, i)) {
+            if (check(qPos, row, column, i)) {
                 return checkSafe(qPos, row, column, i - 1);
             } else {
                 return false;
@@ -63,7 +64,7 @@ public class EightQueensPuzzle {
         return true;
     }
 
-    private boolean checkVertical(int[] qPos, int row, int column, int i) {
+    private boolean check(int[] qPos, int row, int column, int i) {
         return qPos[i] != column && Math.abs(row - i) != Math.abs(column - qPos[i]);
     }
 
@@ -80,19 +81,30 @@ public class EightQueensPuzzle {
         printRow(positions[5]);
         printRow(positions[6]);
         printRow(positions[7]);
-    }
-
-    private void printRow(int rows){
-        printSquares(rows);
-        System.out.print("[Q]");
-        printSquares(N - rows - 1);
         System.out.println();
     }
 
-    private void printSquares(int squares) {
-        if (squares > 0) {
+    private void printRow(int rows){
+        printTiles(rows);
+        System.out.print("[Q]");
+        printTiles(N - rows - 1);
+        System.out.println();
+    }
+
+    private void printTiles(int tiles) {
+        if (tiles > 0) {
             System.out.print("[ ]");
-            printSquares(squares - 1);
+            printTiles(tiles - 1);
         }
+    }
+
+    public static void main(String[] args) {
+//        0, 4, 7, 1, 6, 2, 5, 3
+        int[] rowPos = {0, 1, 2, 3, 4, 5, 6, 7};
+        var nQ = new NQueensPuzzle(rowPos);
+
+        nQ.printBoard();
+        nQ.solveBoard();
+        //nQ.solveBoardDFS();
     }
 }
