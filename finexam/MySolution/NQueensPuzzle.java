@@ -7,12 +7,14 @@ public class NQueensPuzzle {
     }
 
     public void solveBoardDFS() {
-        solveBoardDFS(new int[N][N], 0, 0);
+        DFSforCS392<Integer> dfs = new DFSforCS392<>();
+        solveBoardDFS(new int[N], dfs);
     }
 
-    public void solveBoardDFS(int[][] board, int row, int solutions) {
-        DFSforCS392<Integer> dfs = new DFSforCS392<>();
-        dfs.depthFirstSearch(board, row, solutions);
+    public int solveBoardDFS(int[] qPos, DFSforCS392<Integer> dfs) {
+        int solutions = dfs.depthFirstSearchNQueens(qPos);
+        System.out.print(solutions + " distinct Solutions");
+        return solutions;
     }
 
     public void solveBoard() {
@@ -104,7 +106,7 @@ public class NQueensPuzzle {
         var nQ = new NQueensPuzzle(rowPos);
 
         nQ.printBoard();
-        nQ.solveBoard();
-        //nQ.solveBoardDFS();
+        //nQ.solveBoard();
+        nQ.solveBoardDFS();
     }
 }

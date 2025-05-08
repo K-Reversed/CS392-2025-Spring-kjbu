@@ -84,43 +84,50 @@ public class DFSforCS392<T> {
     }
 
     private final Stack<Node<T>> stack;
+    private final Stack tStack;
 
     public DFSforCS392(){
         stack = new Stack<>();
+        tStack = new Stack<Integer[]>();
     }
 
-    public int depthFirstSearch(int[][] board, int row, int solutions) {
-        for (int column = 0; column < board.length; column++) {
-            if (checkSafe(board, row, column)) {
-                board[row][column] = 1;
-                return depthFirstSearch(board, row, solutions);
-            } else {
-                board[row][column] = 0;
+    public int depthFirstSearchNQueens(int[] arr) {
+        int solutions = 0;
+        tStack.push(new int[]{0, 0});
+        while (!tStack.isEmpty()) {
+            int[] tile = (int[]) tStack.pop();
+            int row = tile[0];
+            int column = tile[1];
+
+            if (column < arr.length) {
+                if (checkSafe(arr, row, column)) {
+                    if (row + 1 == arr.length) {
+                        solutions++;
+                    }
+                    arr[row] = column;
+                    tStack.push(new int[]{row + 1, 0});
+                } else {
+                    tStack.push(new int[]{row, column + 1});
+                }
+            } else if (row > 0) {
+                int prevColumn = arr[row - 1];
+                tStack.push(new int[]{row - 1, prevColumn + 1});
             }
         }
         return solutions;
     }
 
-    private boolean checkSafe(int[][] board, int row, int column) {
-        int i, j;
-
-        for (i = 0; i < column; i++)
-            if (board[row][i] == 1)
+    private boolean checkSafe(int[] positions, int row, int column) {
+        for (int i = 0; i < row; i++) {
+            if (column == positions[i] || Math.abs(row - i) == Math.abs(column - positions[i])) {
                 return false;
-
-        for (i = row, j = column; i >= 0 && j >= 0; i--, j--)
-            if (board[i][j] == 1)
-                return false;
-
-        for (i = row, j = column; j >= 0 && i < board[0].length; i++, j--)
-            if (board[i][j] == 1)
-                return false;
-
+            }
+        }
         return true;
     }
 
-    private int[] depthFirstSearch(int[] arr) {
-        return new int[0];
+    public String depthFirstSearchG24(int[] numbers) {
+        return "";
     }
 
     @SuppressWarnings("ClassEscapesDefinedScope")
@@ -145,7 +152,6 @@ public class DFSforCS392<T> {
                 if (!node.neighbors.peek(i).checked) {
                     node.neighbors.peek(i).checked = true;
                     stack.push(node.neighbors.peek(i));
-
                 }
             }
         }
