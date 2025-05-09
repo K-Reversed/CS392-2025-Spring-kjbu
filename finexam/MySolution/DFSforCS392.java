@@ -1,3 +1,7 @@
+/**
+ * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
+ * @version 1.0, 08 May 2025
+ */
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -84,33 +88,33 @@ public class DFSforCS392<T> {
     }
 
     private final Stack<Node<T>> stack;
-    private final Stack tStack;
+    private Stack tStack;
 
     public DFSforCS392(){
         stack = new Stack<>();
-        tStack = new Stack<Integer[]>();
     }
 
-    public int depthFirstSearchNQueens(int[] arr) {
+    public int depthFirstSearchNQueens(int[] queenPos) {
         int solutions = 0;
+        tStack = new Stack<Integer[]>();
         tStack.push(new int[]{0, 0});
         while (!tStack.isEmpty()) {
             int[] tile = (int[]) tStack.pop();
             int row = tile[0];
             int column = tile[1];
 
-            if (column < arr.length) {
-                if (checkSafe(arr, row, column)) {
-                    if (row + 1 == arr.length) {
+            if (column < queenPos.length) {
+                if (checkSafe(queenPos, row, column)) {
+                    if (row + 1 == queenPos.length) {
                         solutions++;
                     }
-                    arr[row] = column;
+                    queenPos[row] = column;
                     tStack.push(new int[]{row + 1, 0});
                 } else {
                     tStack.push(new int[]{row, column + 1});
                 }
             } else if (row > 0) {
-                int prevColumn = arr[row - 1];
+                int prevColumn = queenPos[row - 1];
                 tStack.push(new int[]{row - 1, prevColumn + 1});
             }
         }
@@ -126,8 +130,71 @@ public class DFSforCS392<T> {
         return true;
     }
 
-    public String depthFirstSearchG24(int[] numbers) {
-        return "";
+    public int depthFirstSearchG24(int[] inputs) {
+        int solutions = 0;
+        tStack = new Stack<double[]>();
+        double[] inputConvert = new double[inputs.length];
+        for (int i = 0; i < inputs.length; i++) {
+            inputConvert[i] = inputs[i];
+        }
+        tStack.push(inputConvert);
+        double precision = 1e-6;
+        while (!tStack.isEmpty()) {
+            double[] preciseCalc = (double[]) tStack.pop();
+            int start = preciseCalc.length;
+
+            if (start <= 1) {
+                if (Math.abs(preciseCalc[0] - 24) < precision) {
+                    solutions++;
+                }
+                continue;
+            }
+            for (int i = 0; i < start; i++) {
+                for (int j = i; j < start; j++) {
+                    double[] newCalc = new double[start - 1];
+                    for (int k = 0, index = 0; k < start; k++) {
+                        if (k != i && k != j) {
+                            newCalc[index++] = preciseCalc[k];
+                        }
+                    }
+                    double[] results = operations(preciseCalc, i, j);
+                    for (double result : results) {
+                        newCalc[start - 2] = result;
+                        tStack.push(newCalc);
+                    }
+                }
+            }
+        }
+        return solutions;
+    }
+
+    private double[] operations(double[] arr, int i, int j) {
+        if (j == 0) {
+            return new double[] {
+                    (arr[j] / arr[i]),
+                    (arr[i] - arr[j]),
+                    (arr[j] - arr[i]),
+                    (arr[i] * arr[j]),
+                    (arr[i] + arr[j])
+            };
+        }
+        if (i == 0) {
+            return new double[] {
+                    (arr[i] / arr[j]),
+                    (arr[i] - arr[j]),
+                    (arr[j] - arr[i]),
+                    (arr[i] * arr[j]),
+                    (arr[i] + arr[j])
+            };
+        }
+        return new double[] {
+                (arr[i] / arr[j]),
+                (arr[j] / arr[i]),
+                (arr[i] - arr[j]),
+                (arr[j] - arr[i]),
+                (arr[i] * arr[j]),
+                (arr[i] + arr[j])
+        };
     }
 
     @SuppressWarnings("ClassEscapesDefinedScope")

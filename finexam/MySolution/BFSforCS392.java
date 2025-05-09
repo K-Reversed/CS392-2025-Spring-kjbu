@@ -1,3 +1,7 @@
+/**
+ * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
+ * @version 1.0, 08 May 2025
+ */
 import java.util.NoSuchElementException;
 
 @SuppressWarnings("rawtypes")

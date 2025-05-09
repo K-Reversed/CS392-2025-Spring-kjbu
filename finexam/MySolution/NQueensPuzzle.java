@@ -1,3 +1,7 @@
+/**
+ * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
+ * @version 1.0, 08 May 2025
+ */
 public class NQueensPuzzle {
     private final int[] queensPos;
     private final int N = 8;
@@ -13,7 +17,7 @@ public class NQueensPuzzle {
 
     public int solveBoardDFS(int[] qPos, DFSforCS392<Integer> dfs) {
         int solutions = dfs.depthFirstSearchNQueens(qPos);
-        System.out.print(solutions + " distinct Solutions");
+        System.out.print(solutions + " distinct solutions");
         return solutions;
     }
 
