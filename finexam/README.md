@@ -3,8 +3,35 @@
 Java Version: 23
 
 Problem 1:
-## [NQueensPuzzle.java](MySolution/EightQueensPuzzle.java)
-In order to not run in a Stack Overflow Error, please adjust the stack allocation to at least 4 mB in the VM options/command line (-Xss4m). 
+## [NQueensPuzzle.java](MySolution/NQueensPuzzle.java)
+Note: In order to not run in a Stack Overflow Error, please adjust the stack allocation to at least 4 mB in the VM options/command line (-Xss4m). 
+
+The N-Queens Puzzle in which a board of N x N size consisting of N number of queens. The implementation used for this problem makes use of a 1d array which records the column of each queen in each row. The puzzle is solved using the  `solveBoard`, a void method used for the main method. This method then passes into another `solveBoard`, a recursive int method used to solve the puzzle with the following parameters:
+* `int[] qPos` (An array recording the position of a queen)
+* `int row` (The current row being checked)
+* `int column` (The current column being checked)
+* `int solutions` (The number of distinct solutions)
+
+The method begins with starting parameters `(new int[N], 0, 0, 0)`
+
+It starts by checking if `column < N`:
+* If true it then checks if a queen at position (row, column) is safe vertically and diagonally (this part is checked within the `checkSafe` boolean method.)) 
+  * If true:
+    * A new final int array `newPos` is created that copies qPos but changes the queen position at the row to the new column.
+    * An if statement then checks if `row + 1 == N`.
+      * If true:
+        * It prints out the current number of solutions (+ 1) as well as a visual  solution on a board.
+        * Then recursively returns `solveBoard` with parameters `(qPos, row, column + 1, solutions + 1)`
+      * If false:
+        * It recursively returns `solveBoard` with parameters '(newPos, row + 1, 0, solutions)'
+  * If false:
+    * It checks if `row > 0`:
+      * If true:
+        * It recursively returns `solveBoard` with parameters `(qPos, row - 1, qPos[row - 1] + 1, solutions)`
+      * If false:
+        * returns solutions, ending the recursive loop.
+
+Note: At no point in this solution are the values being updated, they are either copied from the original value or increased when a recursive loop is called.
 
 Problem 2:
 ## [DFSforCS392.java](MySolution/DFSforCS392.java)
@@ -45,8 +72,8 @@ My implementation starts by initializing int solutions to 0. A stack is then ini
    * The for loop k removes any number equal to i or k from the newCalc array.
    * A new double array results store all operations done to i and j on the preciseCalc array.
    * An enhanced for loop moves all the results into their own array and then pushes it into the stack.
-6. The method returns solutions at the end.
+5. The method returns solutions at the end.
 
 Note: The implementation above still has some major bugs, it returns too many duplicate solutions and sometimes returns solutions for inputs that do not have any. Unsure how to resolve this bug.
 
-Last updated: 08 May 2025
+Last updated: 10 May 2025

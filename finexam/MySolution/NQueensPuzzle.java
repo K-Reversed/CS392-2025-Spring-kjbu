@@ -55,8 +55,9 @@ public class NQueensPuzzle {
     }
 
     private int[] boardSet(int[] board, int row, int newColumn) {
-        board[row] = newColumn;
-        return board;
+        int[] temp = board;
+        temp[row] = newColumn;
+        return temp;
     }
 
     private boolean checkSafe(int[] qPos, int row, int column, int i) {
