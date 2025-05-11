@@ -25,16 +25,24 @@ public class BFSforCS392<T> {
     }
 
     private static class LinkedList<T> {
+        private T data;
         private int size;
-        private LList<T> top;
+        private LinkedList<T> top;
+        private LinkedList<T> next;
+
+        public LinkedList() {}
+
+        public LinkedList(T data) {
+            this.data = data;
+        }
 
         public void insert(T x) {
-            var data = new LList<>(x);
+            var data = new LinkedList<>(x);
             data.next = null;
             if (top == null) {
                 top = data;
             } else {
-                LList<T> tmp = top;
+                LinkedList<T> tmp = top;
                 while (tmp.next != null) {
                     tmp = tmp.next;
                 }
@@ -44,13 +52,22 @@ public class BFSforCS392<T> {
         }
 
         public T peek(int index) {
-            LList<T> tmp = top;
+            LinkedList<T> tmp = top;
             for (int i = 0; i < index; i++) {
                 tmp = tmp.next;
             }
-            return tmp.elem;
+            return tmp.data;
+        }
+
+        public T[] toArray() {
+            T[] array = (T[]) new Object[size];
+            for (int i = 0; i < size; i++) {
+                array[i] = peek(i);
+            }
+            return array;
         }
     }
+
 
     private static class Queue<T> {
         private Node<T> top, bottom;

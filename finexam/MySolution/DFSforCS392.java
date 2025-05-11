@@ -1,6 +1,6 @@
 /**
  * @author Kevin Jiang (kjbu@bu.edu), Hongwei Xi
- * @version 1.0, 08 May 2025
+ * @version 1.1, 10 May 2025
  */
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -26,16 +26,24 @@ public class DFSforCS392<T> {
     }
 
     private static class LinkedList<T> {
+        private T data;
         private int size;
-        private LList<T> top;
+        private LinkedList<T> top;
+        private LinkedList<T> next;
+
+        public LinkedList() {}
+
+        public LinkedList(T data) {
+            this.data = data;
+        }
 
         public void insert(T x) {
-            var data = new LList<>(x);
+            var data = new LinkedList<>(x);
             data.next = null;
             if (top == null) {
                 top = data;
             } else {
-                LList<T> tmp = top;
+                LinkedList<T> tmp = top;
                 while (tmp.next != null) {
                     tmp = tmp.next;
                 }
@@ -45,11 +53,11 @@ public class DFSforCS392<T> {
         }
 
         public T peek(int index) {
-            LList<T> tmp = top;
+            LinkedList<T> tmp = top;
             for (int i = 0; i < index; i++) {
                 tmp = tmp.next;
             }
-            return tmp.elem;
+            return tmp.data;
         }
 
         public T[] toArray() {
